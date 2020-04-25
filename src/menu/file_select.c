@@ -1736,7 +1736,7 @@ void print_save_file_star_count(s8 fileIndex, s16 x, s16 y) {
     #define MARIOTEXT_X1 92
     #define MARIOTEXT_X2 207
 #elif VERSION_US
-    #define SELECT_FILE_X 93
+    #define SELECT_FILE_X 25
     #define SCORE_X 52
     #define COPY_X 117
     #define ERASE_X 177
