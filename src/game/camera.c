@@ -2660,7 +2660,7 @@ void move_mario_head_c_up(UNUSED struct Camera *c) {
     UNUSED s16 pitch = sCUpCameraPitch;
     UNUSED s16 yaw = sModeOffsetYaw;
 
-    sCUpCameraPitch += (s16)(gPlayer1Controller->stickY * 10.f);
+    sCUpCameraPitch -= (s16)(gPlayer1Controller->stickY * 10.f);
     sModeOffsetYaw -= (s16)(gPlayer1Controller->stickX * 10.f);
 
     // Bound looking up to nearly 80 degrees.
