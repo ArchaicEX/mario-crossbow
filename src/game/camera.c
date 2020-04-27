@@ -2716,6 +2716,7 @@ void move_into_c_up(struct Camera *c) {
     if (++sModeInfo.frame == sModeInfo.max) {
         gCameraMovementFlags &= ~CAM_MOVING_INTO_MODE;
     }
+	sStatusFlags &= !CAM_FLAG_BLOCK_SMOOTH_MOVEMENT;
 }
 
 /**
