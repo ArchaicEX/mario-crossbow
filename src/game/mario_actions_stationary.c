@@ -1068,7 +1068,7 @@ s32 act_first_person(struct MarioState *m) {
 
     sp1C = 0 != (m->input & (INPUT_UNKNOWN_10 | 0xC));
     if (m->actionState == 0) {
-        set_camera_mode(m->area->camera, CAMERA_MODE_C_UP, 0x10);
+        set_camera_mode(m->area->camera, CAMERA_MODE_C_UP, 5);
         m->actionState = 1;
     } else {
         if (!(m->input & INPUT_FIRST_PERSON) || sp1C) {
