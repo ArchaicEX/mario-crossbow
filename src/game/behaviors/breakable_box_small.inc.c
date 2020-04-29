@@ -96,7 +96,7 @@ void breakable_box_small_get_thrown(void) {
     o->oHeldState = 0;
     o->oFlags &= ~0x08;
     o->oForwardVel = coss(o->oFaceAnglePitch) * 80;
-    o->oVelY = sins(o->oFaceAnglePitch) * 80;
+    o->oVelY = -sins(o->oFaceAnglePitch) * 80;
     o->oBreakableBoxSmallReleased = 1;
     o->oBreakableBoxSmallFramesSinceReleased = 0;
     o->activeFlags &= ~0x200;
