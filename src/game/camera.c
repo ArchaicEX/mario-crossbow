@@ -2649,7 +2649,7 @@ s32 update_c_up(UNUSED struct Camera *c, Vec3f focus, Vec3f pos) {
     s16 pitch = sCUpCameraPitch;
     s16 yaw = sMarioCamState->faceAngle[1] + sModeOffsetYaw + DEGREES(180);
 
-    focus_on_mario(focus, pos, 125.f, 125.f, 250.f, pitch, yaw);
+    focus_on_mario(focus, pos, 250.f, 250.f, 250.f, pitch, yaw);
     return sMarioCamState->faceAngle[1];
 }
 
@@ -2681,8 +2681,8 @@ void move_mario_head_c_up(UNUSED struct Camera *c) {
     }
 
     // Give mario's neck natural-looking constraints
-    sMarioCamState->headRotation[0] = sCUpCameraPitch * 3 / 4;
-    sMarioCamState->headRotation[1] = sModeOffsetYaw * 3 / 4;
+    sMarioCamState->headRotation[0] = sCUpCameraPitch;
+    sMarioCamState->headRotation[1] = sModeOffsetYaw;
 }
 
 /**
