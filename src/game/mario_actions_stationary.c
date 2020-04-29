@@ -1078,7 +1078,7 @@ s32 act_first_person(struct MarioState *m) {
     }
 	if (m->input & INPUT_Z_PRESSED)
 		spawn_object_abs_with_rot(m->marioObj, 0, MODEL_BREAKABLE_BOX_SMALL, bhvBreakableBoxSmall,
-				m->pos[0], m->pos[1], m->pos[2], 0, m->statusForCamera->headRotation[1], 0);
+				m->pos[0], m->pos[1], m->pos[2], 0, m->statusForCamera->faceAngle[1], 0);
 
     stationary_ground_step(m);
     set_mario_animation(m, MARIO_ANIM_FIRST_PERSON);
