@@ -13,7 +13,7 @@ struct ObjectHitbox sBreakableBoxSmallHitbox = {
 };
 
 void bhv_breakable_box_small_init(void) {
-    o->oGravity = 0f;
+    o->oGravity = 0;
     o->oFriction = 0.99f;
     o->oBuoyancy = 1.4f;
     cur_obj_scale(0.4f);
