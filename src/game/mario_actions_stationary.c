@@ -10,6 +10,7 @@
 #include "audio/external.h"
 #include "memory.h"
 #include "behavior_data.h"
+#include "object_helpers.h"
 #include "sound_init.h"
 #include "level_update.h"
 #include "save_file.h"
@@ -1063,8 +1064,6 @@ s32 act_ground_pound_land(struct MarioState *m) {
 
 s32 act_first_person(struct MarioState *m) {
     s32 sp1C;
-    s16 sp1A;
-    s16 sp18;
 
     sp1C = 0 != (m->input & (INPUT_UNKNOWN_10 | 0xC));
     if (m->actionState == 0) {
@@ -1077,6 +1076,9 @@ s32 act_first_person(struct MarioState *m) {
             return set_mario_action(m, ACT_IDLE, 0);
         }
     }
+	if (m->input & INPUT_Z_DOWN)
+		spawn_object_abs_with_rot(m->marioObj, 0, MODEL_BREAKABLE_BOX_SMALL, bhvBreakableBoxSmall,
+				m->pos[0], m->pos[1], m->pos[z], 0, m->area->camera->yaw, 0);
 
     stationary_ground_step(m);
     set_mario_animation(m, MARIO_ANIM_FIRST_PERSON);
