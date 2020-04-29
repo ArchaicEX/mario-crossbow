@@ -13,13 +13,14 @@ struct ObjectHitbox sBreakableBoxSmallHitbox = {
 };
 
 void bhv_breakable_box_small_init(void) {
-    o->oGravity = 2.5f;
+    o->oGravity = 0f;
     o->oFriction = 0.99f;
     o->oBuoyancy = 1.4f;
     cur_obj_scale(0.4f);
     obj_set_hitbox(o, &sBreakableBoxSmallHitbox);
     o->oAnimState = 1;
     o->activeFlags |= 0x200;
+	o->oHeldState = 2;
 }
 
 void small_breakable_box_spawn_dust(void) {
@@ -44,7 +45,6 @@ void small_breakable_box_act_move(void) {
     if (sp1E & 2) {
         spawn_mist_particles();
         spawn_triangle_break_particles(20, 138, 0.7f, 3);
-        obj_spawn_yellow_coins(o, 3);
         create_sound_spawner(SOUND_GENERAL_BREAK_BOX);
         o->activeFlags = 0;
     }
@@ -107,8 +107,8 @@ void breakable_box_small_get_thrown(void) {
     o->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
     o->oHeldState = 0;
     o->oFlags &= ~0x08;
-    o->oForwardVel = 40.0f;
-    o->oVelY = 20.0f;
+    o->oForwardVel = 80.0f;
+    o->oVelY = 0;
     o->oBreakableBoxSmallReleased = 1;
     o->oBreakableBoxSmallFramesSinceReleased = 0;
     o->activeFlags &= ~0x200;
