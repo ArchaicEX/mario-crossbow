@@ -30,22 +30,11 @@ void small_breakable_box_spawn_dust(void) {
 }
 
 void small_breakable_box_act_move(void) {
-    s16 sp1E = object_step();
+    s16 collisions = object_step();
 
     obj_attack_collided_from_other_object(o);
-    if (sp1E == 1)
-        cur_obj_play_sound_2(SOUND_GENERAL_BOX_LANDING_2);
-    if (sp1E & 1) {
-        if (o->oForwardVel > 20.0f) {
-            cur_obj_play_sound_2(SOUND_ENV_SLIDING);
-            small_breakable_box_spawn_dust();
-        }
-    }
 
-    if (sp1E & 2) {
-        spawn_mist_particles();
-        spawn_triangle_break_particles(20, 138, 0.7f, 3);
-        create_sound_spawner(SOUND_GENERAL_BREAK_BOX);
+    if (collisions & 1 || collisions & 2) {
         o->activeFlags = 0;
     }
 
