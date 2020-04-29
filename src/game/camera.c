@@ -2716,7 +2716,6 @@ void move_into_c_up(struct Camera *c) {
     if (++sModeInfo.frame == sModeInfo.max) {
         gCameraMovementFlags &= ~CAM_MOVING_INTO_MODE;
     }
-	sStatusFlags &= !CAM_FLAG_BLOCK_SMOOTH_MOVEMENT;
 }
 
 /**
@@ -2949,11 +2948,12 @@ void update_lakitu(struct Camera *c) {
         set_or_approach_f32_asymptotic(&gLakituState.posVSpeed, 0.3f, 0.05f);
 
         // Turn on smooth movement when it hasn't been blocked for 2 frames
-        if (sStatusFlags & CAM_FLAG_BLOCK_SMOOTH_MOVEMENT) {
+        /*if (sStatusFlags & CAM_FLAG_BLOCK_SMOOTH_MOVEMENT) {
             sStatusFlags &= ~CAM_FLAG_BLOCK_SMOOTH_MOVEMENT;
         } else {
             sStatusFlags |= CAM_FLAG_SMOOTH_MOVEMENT;
-        }
+        }*/
+		sStatusFlags &= ~CAM_FLAG_SMOOTH_MOVEMENT;
 
         vec3f_copy(gLakituState.pos, gLakituState.curPos);
         vec3f_copy(gLakituState.focus, gLakituState.curFocus);
