@@ -6,10 +6,10 @@ struct ObjectHitbox sBreakableBoxSmallHitbox = {
     /* damageOrCoinValue: */ 0,
     /* health:            */ 1,
     /* numLootCoins:      */ 0,
-    /* radius:            */ 150,
-    /* height:            */ 250,
-    /* hurtboxRadius:     */ 150,
-    /* hurtboxHeight:     */ 250,
+    /* radius:            */ 5,
+    /* height:            */ 1,
+    /* hurtboxRadius:     */ 5,
+    /* hurtboxHeight:     */ 1,
 };
 
 void bhv_breakable_box_small_init(void) {
@@ -54,18 +54,7 @@ void small_breakable_box_act_move(void) {
 
 void breakable_box_small_released_loop(void) {
     o->oBreakableBoxSmallFramesSinceReleased++;
-
-    // Begin flashing
-    if (o->oBreakableBoxSmallFramesSinceReleased > 810) {
-        if (o->oBreakableBoxSmallFramesSinceReleased & 1)
-            o->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
-        else
-            o->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
-    }
-
-    // Despawn, and create a corkbox respawner
-    if (o->oBreakableBoxSmallFramesSinceReleased > 900) {
-        create_respawner(MODEL_BREAKABLE_BOX_SMALL, bhvBreakableBoxSmall, 3000);
+    if (o->oBreakableBoxSmallFramesSinceReleased > 120) {
         o->activeFlags = 0;
     }
 }
@@ -82,7 +71,6 @@ void breakable_box_small_idle_loop(void) {
 
         case 101:
             o->activeFlags = 0;
-            create_respawner(MODEL_BREAKABLE_BOX_SMALL, bhvBreakableBoxSmall, 3000);
             break;
     }
 
@@ -107,8 +95,8 @@ void breakable_box_small_get_thrown(void) {
     o->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
     o->oHeldState = 0;
     o->oFlags &= ~0x08;
-    o->oForwardVel = 80.0f;
-    o->oVelY = 0;
+    o->oForwardVel = sins(o->oFaceAnglePitch) * 80;
+    o->oVelY = coss(o->oFaceAnglePitch) * 80;
     o->oBreakableBoxSmallReleased = 1;
     o->oBreakableBoxSmallFramesSinceReleased = 0;
     o->activeFlags &= ~0x200;
