@@ -10,6 +10,7 @@
 #include "audio/external.h"
 #include "memory.h"
 #include "behavior_data.h"
+#include "object_helpers.h"
 #include "sound_init.h"
 #include "level_update.h"
 #include "save_file.h"
@@ -1062,35 +1063,26 @@ s32 act_ground_pound_land(struct MarioState *m) {
 }
 
 s32 act_first_person(struct MarioState *m) {
+	s16 boltAngle;
     s32 sp1C;
-    s16 sp1A;
-    s16 sp18;
 
     sp1C = 0 != (m->input & (INPUT_UNKNOWN_10 | 0xC));
     if (m->actionState == 0) {
-        lower_background_noise(2);
-        set_camera_mode(m->area->camera, CAMERA_MODE_C_UP, 0x10);
+        set_camera_mode(m->area->camera, CAMERA_MODE_C_UP, 5);
         m->actionState = 1;
     } else {
         if (!(m->input & INPUT_FIRST_PERSON) || sp1C) {
-            raise_background_noise(2);
             // Go back to the last camera mode
             set_camera_mode(m->area->camera, -1, 1);
             return set_mario_action(m, ACT_IDLE, 0);
         }
     }
-
-    if (m->floor->type == SURFACE_LOOK_UP_WARP) {
-        if (save_file_get_total_star_count(gCurrSaveFileNum - 1, 0, 0x18) >= 10) {
-            sp1A = m->statusForCamera->headRotation[0];
-            sp18 = ((m->statusForCamera->headRotation[1] * 4) / 3) + m->faceAngle[1];
-            if (sp1A == -0x1800) {
-                if (sp18 < -0x6FFF || sp18 >= 0x7000) {
-                    level_trigger_warp(m, 1);
-                }
-            }
-        }
-    }
+	if (m->input & INPUT_Z_PRESSED) {
+		boltAngle = m->statusForCamera->faceAngle[1] + m->statusForCamera->headRotation[1];
+		spawn_object_abs_with_rot(m->marioObj, 0, MODEL_BREAKABLE_BOX_SMALL, bhvBreakableBoxSmall,
+				m->pos[0] + (s16)(sins(boltAngle) * 60), m->pos[1] + 125, m->pos[2] + (s16)(coss(boltAngle) * 60),
+				m->statusForCamera->faceAngle[0] + m->statusForCamera->headRotation[0], boltAngle, 0);
+	}
 
     stationary_ground_step(m);
     set_mario_animation(m, MARIO_ANIM_FIRST_PERSON);

@@ -6,20 +6,21 @@ struct ObjectHitbox sBreakableBoxSmallHitbox = {
     /* damageOrCoinValue: */ 0,
     /* health:            */ 1,
     /* numLootCoins:      */ 0,
-    /* radius:            */ 150,
-    /* height:            */ 250,
-    /* hurtboxRadius:     */ 150,
-    /* hurtboxHeight:     */ 250,
+    /* radius:            */ 5,
+    /* height:            */ 1,
+    /* hurtboxRadius:     */ 5,
+    /* hurtboxHeight:     */ 1,
 };
 
 void bhv_breakable_box_small_init(void) {
-    o->oGravity = 2.5f;
+    o->oGravity = 0;
     o->oFriction = 0.99f;
     o->oBuoyancy = 1.4f;
     cur_obj_scale(0.4f);
     obj_set_hitbox(o, &sBreakableBoxSmallHitbox);
     o->oAnimState = 1;
     o->activeFlags |= 0x200;
+	o->oHeldState = 2;
 }
 
 void small_breakable_box_spawn_dust(void) {
@@ -29,23 +30,11 @@ void small_breakable_box_spawn_dust(void) {
 }
 
 void small_breakable_box_act_move(void) {
-    s16 sp1E = object_step();
+    s16 collisions = object_step();
 
     obj_attack_collided_from_other_object(o);
-    if (sp1E == 1)
-        cur_obj_play_sound_2(SOUND_GENERAL_BOX_LANDING_2);
-    if (sp1E & 1) {
-        if (o->oForwardVel > 20.0f) {
-            cur_obj_play_sound_2(SOUND_ENV_SLIDING);
-            small_breakable_box_spawn_dust();
-        }
-    }
 
-    if (sp1E & 2) {
-        spawn_mist_particles();
-        spawn_triangle_break_particles(20, 138, 0.7f, 3);
-        obj_spawn_yellow_coins(o, 3);
-        create_sound_spawner(SOUND_GENERAL_BREAK_BOX);
+    if (collisions & 1 || collisions & 2) {
         o->activeFlags = 0;
     }
 
@@ -54,18 +43,7 @@ void small_breakable_box_act_move(void) {
 
 void breakable_box_small_released_loop(void) {
     o->oBreakableBoxSmallFramesSinceReleased++;
-
-    // Begin flashing
-    if (o->oBreakableBoxSmallFramesSinceReleased > 810) {
-        if (o->oBreakableBoxSmallFramesSinceReleased & 1)
-            o->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
-        else
-            o->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
-    }
-
-    // Despawn, and create a corkbox respawner
-    if (o->oBreakableBoxSmallFramesSinceReleased > 900) {
-        create_respawner(MODEL_BREAKABLE_BOX_SMALL, bhvBreakableBoxSmall, 3000);
+    if (o->oBreakableBoxSmallFramesSinceReleased > 120) {
         o->activeFlags = 0;
     }
 }
@@ -82,7 +60,6 @@ void breakable_box_small_idle_loop(void) {
 
         case 101:
             o->activeFlags = 0;
-            create_respawner(MODEL_BREAKABLE_BOX_SMALL, bhvBreakableBoxSmall, 3000);
             break;
     }
 
@@ -107,8 +84,8 @@ void breakable_box_small_get_thrown(void) {
     o->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
     o->oHeldState = 0;
     o->oFlags &= ~0x08;
-    o->oForwardVel = 40.0f;
-    o->oVelY = 20.0f;
+    o->oForwardVel = coss(o->oFaceAnglePitch) * 80;
+    o->oVelY = -sins(o->oFaceAnglePitch) * 80;
     o->oBreakableBoxSmallReleased = 1;
     o->oBreakableBoxSmallFramesSinceReleased = 0;
     o->activeFlags &= ~0x200;
