@@ -162,11 +162,11 @@ static void goomba_act_walk(void) {
         cur_obj_play_sound_at_anim_range(2, 17, SOUND_OBJ_GOOMBA_WALK);
     }
 
-	object_step();
 	cur_obj_follow_path(0);
 	o->oGoombaTargetYaw = o->oPathedTargetYaw;
 	o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oGoombaTargetYaw, 0x400);
 	o->oForwardVel = 40.0f;
+	cur_obj_move_standard(-78);
 }
 
 /**
