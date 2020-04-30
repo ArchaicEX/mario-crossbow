@@ -554,11 +554,11 @@
 /* Goomba */
 #define /*0x0F4*/ oGoombaSize                OBJECT_FIELD_S32(0x1B)
 #define /*0x0F8*/ oGoombaScale               OBJECT_FIELD_F32(0x1C)
-#define /*0x0FC*/ oGoombaWalkTimer           OBJECT_FIELD_S32(0x1D)
-#define /*0x100*/ oGoombaTargetYaw           OBJECT_FIELD_S32(0x1E)
-#define /*0x104*/ oGoombaBlinkTimer          OBJECT_FIELD_S32(0x1F)
-#define /*0x108*/ oGoombaTurningAwayFromWall OBJECT_FIELD_S32(0x20)
-#define /*0x10C*/ oGoombaRelativeSpeed       OBJECT_FIELD_F32(0x21)
+#define /*0x0FC*/ oGoombaWalkTimer           OBJECT_FIELD_S32(0x22)
+#define /*0x100*/ oGoombaTargetYaw           OBJECT_FIELD_S32(0x23)
+#define /*0x104*/ oGoombaBlinkTimer          OBJECT_FIELD_S32(0x24)
+#define /*0x108*/ oGoombaTurningAwayFromWall OBJECT_FIELD_S32(0x25)
+#define /*0x10C*/ oGoombaRelativeSpeed       OBJECT_FIELD_F32(0x26)
 
 /* Haunted Chair */
 #define /*0x0F4*/ oHauntedChairUnkF4  OBJECT_FIELD_S32(0x1B)
