@@ -1709,7 +1709,10 @@ s32 execute_mario_action(UNUSED struct Object *o) {
     s32 inLoop = TRUE;
 
     if (gMarioState->action) {
-        gMarioState->marioObj->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
+		if (gMarioState->action == ACT_FIRST_PERSON)
+			gMarioState->marioObj->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
+		else
+			gMarioState->marioObj->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
         mario_reset_bodystate(gMarioState);
         update_mario_inputs(gMarioState);
         mario_handle_special_floors(gMarioState);
