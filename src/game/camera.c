@@ -2631,7 +2631,7 @@ s32 exit_c_up(struct Camera *c) {
             }
 
             gCameraMovementFlags |= CAM_MOVE_STARTED_EXITING_C_UP;
-            transition_next_state(c, 15);
+            transition_next_state(c, 5);
         } else {
             // Let the next camera mode handle it
             gCameraMovementFlags &= ~(CAM_MOVE_STARTED_EXITING_C_UP | CAM_MOVE_C_UP_MODE);
@@ -2660,7 +2660,7 @@ void move_mario_head_c_up(UNUSED struct Camera *c) {
     UNUSED s16 pitch = sCUpCameraPitch;
     UNUSED s16 yaw = sModeOffsetYaw;
 
-    sCUpCameraPitch += (s16)(gPlayer1Controller->stickY * 10.f);
+    sCUpCameraPitch -= (s16)(gPlayer1Controller->stickY * 10.f);
     sModeOffsetYaw -= (s16)(gPlayer1Controller->stickX * 10.f);
 
     // Bound looking up to nearly 80 degrees.
@@ -2681,8 +2681,8 @@ void move_mario_head_c_up(UNUSED struct Camera *c) {
     }
 
     // Give mario's neck natural-looking constraints
-    sMarioCamState->headRotation[0] = sCUpCameraPitch * 3 / 4;
-    sMarioCamState->headRotation[1] = sModeOffsetYaw * 3 / 4;
+    sMarioCamState->headRotation[0] = sCUpCameraPitch;
+    sMarioCamState->headRotation[1] = sModeOffsetYaw;
 }
 
 /**
@@ -2953,6 +2953,8 @@ void update_lakitu(struct Camera *c) {
         } else {
             sStatusFlags |= CAM_FLAG_SMOOTH_MOVEMENT;
         }
+		if (c->mode == CAMERA_MODE_C_UP)
+			sStatusFlags &= ~CAM_FLAG_SMOOTH_MOVEMENT;
 
         vec3f_copy(gLakituState.pos, gLakituState.curPos);
         vec3f_copy(gLakituState.focus, gLakituState.curFocus);
