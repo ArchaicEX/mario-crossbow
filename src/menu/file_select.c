@@ -1447,16 +1447,16 @@ void bhv_menu_button_manager_loop(void) {
             check_main_menu_clicked_buttons();
             break;
         case MENU_BUTTON_PLAY_FILE_A:
-            load_main_menu_save_file(sMainMenuButtons[MENU_BUTTON_PLAY_FILE_A], 1);
+            load_main_menu_save_file(sMainMenuButtons[MENU_BUTTON_PLAY_FILE_A], 9);
             break;
         case MENU_BUTTON_PLAY_FILE_B:
-            load_main_menu_save_file(sMainMenuButtons[MENU_BUTTON_PLAY_FILE_B], 2);
+            load_main_menu_save_file(sMainMenuButtons[MENU_BUTTON_PLAY_FILE_B], 36);
             break;
         case MENU_BUTTON_PLAY_FILE_C:
-            load_main_menu_save_file(sMainMenuButtons[MENU_BUTTON_PLAY_FILE_C], 3);
+            load_main_menu_save_file(sMainMenuButtons[MENU_BUTTON_PLAY_FILE_C], 15);
             break;
         case MENU_BUTTON_PLAY_FILE_D:
-            load_main_menu_save_file(sMainMenuButtons[MENU_BUTTON_PLAY_FILE_D], 4);
+            load_main_menu_save_file(sMainMenuButtons[MENU_BUTTON_PLAY_FILE_D], 34);
             break;
         case MENU_BUTTON_SCORE:
             check_score_menu_clicked_buttons(sMainMenuButtons[MENU_BUTTON_SCORE]);
