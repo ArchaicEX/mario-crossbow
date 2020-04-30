@@ -161,6 +161,7 @@ static void mark_goomba_as_dead(void) {
 static void goomba_act_walk(void) {
 	cur_obj_follow_path(0);
 	cur_obj_rotate_yaw_toward(o->oPathedTargetYaw, 0x400);
+	o->oForwardVel = 40.0f;
 }
 
 /**
