@@ -39,6 +39,8 @@ static struct GoombaProperties sGoombaProperties[] = {
     { 0.5f, SOUND_OBJ_ENEMY_DEATH_HIGH, 1500, 0 },
 };
 
+static void *sPaths[] = { bob_seg7_metal_ball_path0, bob_seg7_metal_ball_path1, bob_seg7_trajectory_koopa };
+
 /**
  * Attack handlers for goombas.
  */
@@ -121,6 +123,10 @@ void bhv_goomba_init(void) {
     o->oDamageOrCoinValue = sGoombaProperties[o->oGoombaSize].damage;
 
     o->oGravity = -8.0f / 3.0f * o->oGoombaScale;
+
+	o->oPathedStartWaypoint = o->oPathedPrevWaypoint =
+		segmented_to_virtual(sPaths[o->oBehParams2ndByte >> 4]);
+	o->oFlags |= OBJ_FLAG_ACTIVE_FROM_AFAR;
 }
 
 /**
@@ -153,6 +159,8 @@ static void mark_goomba_as_dead(void) {
  * chase him.
  */
 static void goomba_act_walk(void) {
+	cur_obj_follow_path(0);
+	cur_obj_rotate_yaw_toward(o->oPathedTargetYaw, 0x400);
 }
 
 /**
