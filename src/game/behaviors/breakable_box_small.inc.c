@@ -38,7 +38,7 @@ void small_breakable_box_act_move(void) {
         o->activeFlags = 0;
     }
 
-    obj_check_floor_death(sp1E, sObjFloor);
+    obj_check_floor_death(collisions, sObjFloor);
 }
 
 void breakable_box_small_released_loop(void) {
