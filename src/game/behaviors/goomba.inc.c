@@ -20,8 +20,6 @@ static struct ObjectHitbox sGoombaHitbox = {
     /* hurtboxHeight:     */ 40,
 };
 
-static void *sPaths[] = { bob_seg7_metal_ball_path0, bob_seg7_metal_ball_path1, bob_seg7_trajectory_koopa };
-
 /**
  * Properties that vary based on goomba size.
  */
@@ -123,10 +121,6 @@ void bhv_goomba_init(void) {
     o->oDamageOrCoinValue = sGoombaProperties[o->oGoombaSize].damage;
 
     o->oGravity = -8.0f / 3.0f * o->oGoombaScale;
-
-	o->oPathedStartWaypoint = o->oPathedPrevWaypoint =
-		segmented_to_virtual(sPaths[o->oBehParams2ndByte >> 4]);
-	o->oFlags |= OBJ_FLAG_ACTIVE_FROM_AFAR;
 }
 
 /**
@@ -154,7 +148,13 @@ static void mark_goomba_as_dead(void) {
     }
 }
 
+/**
+ * Walk around randomly occasionally jumping. If mario comes within range,
+ * chase him.
+ */
 static void goomba_act_walk(void) {
+    treat_far_home_as_mario(1000.0f);
+
     obj_forward_vel_approach(o->oGoombaRelativeSpeed * o->oGoombaScale, 0.4f);
 
     // If walking fast enough, play footstep sounds
@@ -162,11 +162,55 @@ static void goomba_act_walk(void) {
         cur_obj_play_sound_at_anim_range(2, 17, SOUND_OBJ_GOOMBA_WALK);
     }
 
-	cur_obj_follow_path(0);
-	o->oGoombaTargetYaw = o->oPathedTargetYaw;
-	o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oGoombaTargetYaw, 0x400);
-	o->oForwardVel = 40.0f;
-	cur_obj_move_standard(-78);
+    //! By strategically hitting a wall, steep slope, or another goomba, we can
+    //  prevent the goomba from turning back toward home for a while (goomba
+    //  chase extension)
+    //! It seems theoretically possible to get 2-3 goombas to repeatedly touch
+    //  each other and move arbitrarily far from their home, but it's
+    //  extremely precise and chaotic in practice, so probably can't be performed
+    //  for nontrivial distances
+    if (o->oGoombaTurningAwayFromWall) {
+        o->oGoombaTurningAwayFromWall = obj_resolve_collisions_and_turn(o->oGoombaTargetYaw, 0x200);
+    } else {
+        // If far from home, walk toward home.
+        if (o->oDistanceToMario >= 25000.0f) {
+            o->oGoombaTargetYaw = o->oAngleToMario;
+            o->oGoombaWalkTimer = random_linear_offset(20, 30);
+        }
+
+        if (!(o->oGoombaTurningAwayFromWall =
+                  obj_bounce_off_walls_edges_objects(&o->oGoombaTargetYaw))) {
+            if (o->oDistanceToMario < 500.0f) {
+                // If close to mario, begin chasing him. If not already chasing
+                // him, jump first
+
+                if (o->oGoombaRelativeSpeed <= 2.0f) {
+                    goomba_begin_jump();
+                }
+
+                o->oGoombaTargetYaw = o->oAngleToMario;
+                o->oGoombaRelativeSpeed = 20.0f;
+            } else {
+                // If mario is far away, walk at a normal pace, turning randomly
+                // and occasionally jumping
+
+                o->oGoombaRelativeSpeed = 4.0f / 3.0f;
+                if (o->oGoombaWalkTimer != 0) {
+                    o->oGoombaWalkTimer -= 1;
+                } else {
+                    if (random_u16() & 3) {
+                        o->oGoombaTargetYaw = obj_random_fixed_turn(0x2000);
+                        o->oGoombaWalkTimer = random_linear_offset(100, 100);
+                    } else {
+                        goomba_begin_jump();
+                        o->oGoombaTargetYaw = obj_random_fixed_turn(0x6000);
+                    }
+                }
+            }
+        }
+
+        cur_obj_rotate_yaw_toward(o->oGoombaTargetYaw, 0x200);
+    }
 }
 
 /**
@@ -265,6 +309,8 @@ void bhv_goomba_update(void) {
                                sGoombaAttackHandlers[o->oGoombaSize & 1])) {
             mark_goomba_as_dead();
         }
+
+        cur_obj_move_standard(-78);
     } else {
         o->oAnimState = TRUE;
     }
