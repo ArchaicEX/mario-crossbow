@@ -92,7 +92,6 @@ const LevelScript level_bob_entry[] = {
         WARP_NODE(/*id*/ 0xF1, /*destLevel*/ LEVEL_CASTLE, /*destArea*/ 0x01, /*destNode*/ 0x64, /*flags*/ WARP_NO_CHECKPOINT),
         TERRAIN(/*terrainData*/ bob_seg7_collision_level),
         MACRO_OBJECTS(/*objList*/ bob_seg7_macro_objs),
-        SHOW_DIALOG(/*index*/ 0x00, DIALOG_000),
         SET_BACKGROUND_MUSIC(/*settingsPreset*/ 0x0000, /*seq*/ SEQ_LEVEL_GRASS),
         TERRAIN_TYPE(/*terrainType*/ TERRAIN_GRASS),
     END_AREA(),
