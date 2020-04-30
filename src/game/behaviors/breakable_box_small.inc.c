@@ -16,7 +16,7 @@ void bhv_breakable_box_small_init(void) {
     o->oGravity = 0;
     o->oFriction = 0.99f;
     o->oBuoyancy = 1.4f;
-    cur_obj_scale(0.4f);
+    cur_obj_scale(0.02f);
     obj_set_hitbox(o, &sBreakableBoxSmallHitbox);
     o->oAnimState = 1;
     o->activeFlags |= 0x200;
