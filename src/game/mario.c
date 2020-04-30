@@ -1710,7 +1710,7 @@ s32 execute_mario_action(UNUSED struct Object *o) {
 
     if (gMarioState->action) {
 		if (gMarioState->action == ACT_FIRST_PERSON)
-			gMarioState->marioObj->head.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
+			gMarioState->marioObj->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
 		else
 			gMarioState->marioObj->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
         mario_reset_bodystate(gMarioState);
