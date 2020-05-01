@@ -4,6 +4,7 @@
 #include "mario.h"
 #include "debug.h"
 #include "spawn_object.h"
+#include "obj_behaviors.h"
 #include "object_list_processor.h"
 #include "interaction.h"
 
@@ -152,19 +153,37 @@ void check_pushable_object_collision(void) {
 void check_destructive_object_collision(void) {
     struct Object *sp1C = (struct Object *) &gObjectLists[OBJ_LIST_DESTRUCTIVE];
     struct Object *sp18 = (struct Object *) sp1C->header.next;
+	s8 count;
+	f32 oldVF, oldVY, oldX, oldY, oldZ;
 
     while (sp18 != sp1C) {
-        if (!(sp18->activeFlags & ACTIVE_FLAG_UNK9)) {
-            check_collision_in_list(sp18, (struct Object *) sp18->header.next, sp1C);
-            check_collision_in_list(sp18, (struct Object *) gObjectLists[OBJ_LIST_GENACTOR].next,
-                          (struct Object *) &gObjectLists[OBJ_LIST_GENACTOR]);
-            check_collision_in_list(sp18, (struct Object *) gObjectLists[OBJ_LIST_PUSHABLE].next,
-                          (struct Object *) &gObjectLists[OBJ_LIST_PUSHABLE]);
-            check_collision_in_list(sp18, (struct Object *) gObjectLists[OBJ_LIST_SURFACE].next,
-                          (struct Object *) &gObjectLists[OBJ_LIST_SURFACE]);
-        }
-        sp18 = (struct Object *) sp18->header.next;
-    }
+		if (sp18->activeFlags & ACTIVE_FLAG_UNK9)
+			continue;
+		oldVF = sp18->oForwardVel;
+		sp18->oForwardVel /= 4;
+		oldVY = sp18->oVelY;
+		sp18->oVelY /= 4;
+		oldX = sp18->oPosX;
+		oldY = sp18->oPosY;
+		oldZ = sp18->oPosZ;
+		gCurrentObject = sp18;
+		for (count = 0; count < 4; count++) {
+			check_collision_in_list(sp18, (struct Object *) sp18->header.next, sp1C);
+			check_collision_in_list(sp18, (struct Object *) gObjectLists[OBJ_LIST_GENACTOR].next,
+				(struct Object *) &gObjectLists[OBJ_LIST_GENACTOR]);
+			check_collision_in_list(sp18, (struct Object *) gObjectLists[OBJ_LIST_PUSHABLE].next,
+				(struct Object *) &gObjectLists[OBJ_LIST_PUSHABLE]);
+			check_collision_in_list(sp18, (struct Object *) gObjectLists[OBJ_LIST_SURFACE].next,
+				(struct Object *) &gObjectLists[OBJ_LIST_SURFACE]);
+			obj_move_xyz_using_fvel_and_yaw(o);
+		}
+		sp18->oForwardVel = oldVF;
+		sp18->oPosX = oldX;
+		sp18->oPosY = oldY;
+		sp18->oPosZ = oldZ;
+		sp18->oVelY = oldVY;
+		sp18 = (struct Object *) sp18->header.next;
+	}
 }
 
 void detect_object_collisions(void) {
