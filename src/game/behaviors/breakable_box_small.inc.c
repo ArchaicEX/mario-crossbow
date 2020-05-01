@@ -6,17 +6,17 @@ struct ObjectHitbox sBreakableBoxSmallHitbox = {
     /* damageOrCoinValue: */ 0,
     /* health:            */ 1,
     /* numLootCoins:      */ 0,
-    /* radius:            */ 3,
-    /* height:            */ 6,
-    /* hurtboxRadius:     */ 3,
-    /* hurtboxHeight:     */ 6,
+    /* radius:            */ 8,
+    /* height:            */ 16,
+    /* hurtboxRadius:     */ 8,
+    /* hurtboxHeight:     */ 16,
 };
 
 void bhv_breakable_box_small_init(void) {
     o->oGravity = 0;
     o->oFriction = 0.99f;
     o->oBuoyancy = 1.4f;
-    cur_obj_scale(0.04f);
+    cur_obj_scale(0.0256f);
     obj_set_hitbox(o, &sBreakableBoxSmallHitbox);
     o->oAnimState = 1;
     o->activeFlags |= 0x200;
