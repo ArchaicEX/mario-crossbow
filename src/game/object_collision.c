@@ -134,8 +134,6 @@ void check_player_object_collision(void) {
                       (struct Object *) &gObjectLists[OBJ_LIST_PUSHABLE]);
         check_collision_in_list(sp18, (struct Object *) gObjectLists[OBJ_LIST_SURFACE].next,
                       (struct Object *) &gObjectLists[OBJ_LIST_SURFACE]);
-        check_collision_in_list(sp18, (struct Object *) gObjectLists[OBJ_LIST_DESTRUCTIVE].next,
-                      (struct Object *) &gObjectLists[OBJ_LIST_DESTRUCTIVE]);
         sp18 = (struct Object *) sp18->header.next;
     }
 }
