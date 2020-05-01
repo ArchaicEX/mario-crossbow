@@ -175,7 +175,7 @@ void check_destructive_object_collision(void) {
 				(struct Object *) &gObjectLists[OBJ_LIST_PUSHABLE]);
 			check_collision_in_list(sp18, (struct Object *) gObjectLists[OBJ_LIST_SURFACE].next,
 				(struct Object *) &gObjectLists[OBJ_LIST_SURFACE]);
-			obj_move_xyz_using_fvel_and_yaw(o);
+			obj_move_xyz_using_fvel_and_yaw(gCurrentObject);
 		}
 		sp18->oForwardVel = oldVF;
 		sp18->oPosX = oldX;
