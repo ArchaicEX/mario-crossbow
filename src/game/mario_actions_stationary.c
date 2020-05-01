@@ -1063,7 +1063,7 @@ s32 act_ground_pound_land(struct MarioState *m) {
 }
 
 s32 act_first_person(struct MarioState *m) {
-	s16 boltAngle, cameraPitch;
+	s16 distance, pitch, yaw;
     s32 sp1C;
 
     sp1C = 0 != (m->input & (INPUT_UNKNOWN_10 | 0xC));
@@ -1078,11 +1078,10 @@ s32 act_first_person(struct MarioState *m) {
         }
     }
 	if (m->input & INPUT_Z_PRESSED) {
-		boltAngle = m->statusForCamera->faceAngle[1] + m->statusForCamera->headRotation[1];
-		cameraPitch = DEGREES(180) - m->statusForCamera->headRotation[0];
+		vec3f_get_dist_and_angle(gCamera->pos, gCamera->focus, &distance, &pitch, &yaw);
 		spawn_object_abs_with_rot(m->marioObj, 0, MODEL_BREAKABLE_BOX_SMALL, bhvBreakableBoxSmall,
-				m->pos[0] + (s16)(sins(boltAngle) * 60), m->pos[1] + 121 + (s16)(coss(cameraPitch) * 5), m->pos[2] + (s16)(coss(boltAngle) * 60),
-				m->statusForCamera->faceAngle[0] + m->statusForCamera->headRotation[0], boltAngle, 0);
+				gCamera->pos[0] + (s16)(sins(yaw) * 120), gCamera->pos[1], gCamera->pos[2] + (s16)(coss(yaw) * 120),
+				pitch, yaw, 0);
 	}
 
     stationary_ground_step(m);
