@@ -1063,7 +1063,8 @@ s32 act_ground_pound_land(struct MarioState *m) {
 }
 
 s32 act_first_person(struct MarioState *m) {
-	s16 distance, pitch, yaw;
+	f32 distance;
+	s16 pitch, yaw;
     s32 sp1C;
 
     sp1C = 0 != (m->input & (INPUT_UNKNOWN_10 | 0xC));
