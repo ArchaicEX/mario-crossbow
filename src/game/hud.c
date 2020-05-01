@@ -412,8 +412,8 @@ void render_hud_camera_status(void) {
             render_hud_small_tex_lut(x + 4, y + 16, (*cameraLUT)[GLYPH_CAM_ARROW_DOWN]);
             break;
         case CAM_STATUS_C_UP:
-			render_hud_small_tex_lut(SCREEN_WIDTH / 2 - 8, SCREEN_HEIGHT / 2 - 4, (*cameraLUT)[GLYPH_CAM_ARROW_UP]);
-			render_hud_small_tex_lut(SCREEN_WIDTH / 2 - 8, SCREEN_HEIGHT / 2 - 12, (*cameraLUT)[GLYPH_CAM_ARROW_DOWN]);
+			render_hud_small_tex_lut(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 2, (*cameraLUT)[GLYPH_CAM_ARROW_UP]);
+			render_hud_small_tex_lut(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 10, (*cameraLUT)[GLYPH_CAM_ARROW_DOWN]);
             render_hud_small_tex_lut(x + 4, y - 8, (*cameraLUT)[GLYPH_CAM_ARROW_UP]);
             break;
     }
