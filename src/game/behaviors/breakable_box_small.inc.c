@@ -1,5 +1,5 @@
 // breakable_box.c.inc
-#include "print.h"
+
 struct ObjectHitbox sBreakableBoxSmallHitbox = {
     /* interactType:      */ INTERACT_GRABBABLE,
     /* downOffset:        */ 20,
@@ -86,8 +86,6 @@ void breakable_box_small_get_thrown(void) {
     o->oFlags &= ~0x08;
     o->oForwardVel = coss(-o->oFaceAnglePitch) * 200.f;
     o->oVelY = sins(-o->oFaceAnglePitch) * 200.f;
-	print_text_fmt_int(150, 45, "%d", (s32)o->oForwardVel);
-	print_text_fmt_int(150, 60, "%d", (s32)o->oVelY);
     o->oBreakableBoxSmallReleased = 1;
     o->oBreakableBoxSmallFramesSinceReleased = 0;
     o->activeFlags &= ~0x200;
