@@ -272,12 +272,9 @@ void render_hud_mario_lives(void) {
     print_text(22, HUD_TOP_Y, ","); // 'Mario Head' glyph
     print_text(38, HUD_TOP_Y, "*"); // 'X' glyph
     print_text_fmt_int(54, HUD_TOP_Y, "%d", gHudDisplay.lives);
-	print_text_fmt_int(22, 180, "%d", gCamera->pos[0]);
-	print_text_fmt_int(22, 165, "%d", gCamera->pos[1]);
-	print_text_fmt_int(22, 150, "%d", gCamera->pos[2]);
-	vec3f_get_dist_and_angle(gCamera->pos, gCamera->focus, &distance, &pitch, &yaw);
-	print_text_fmt_int(22, 135, "%d", pitch);
-	print_text_fmt_int(22, 120, "%d", yaw);
+	print_text_fmt_int(22, 180, "%d", gMarioState->pos[0]);
+	print_text_fmt_int(22, 165, "%d", gMarioState->pos[1]);
+	print_text_fmt_int(22, 150, "%d", gMarioState->pos[2]);
 }
 
 /**
@@ -415,8 +412,8 @@ void render_hud_camera_status(void) {
             render_hud_small_tex_lut(x + 4, y + 16, (*cameraLUT)[GLYPH_CAM_ARROW_DOWN]);
             break;
         case CAM_STATUS_C_UP:
-			render_hud_small_tex_lut(SCREEN_WIDTH / 2 - 4, SCREEN_HEIGHT / 2 + 4, (*cameraLUT)[GLYPH_CAM_ARROW_UP]);
-			render_hud_small_tex_lut(SCREEN_WIDTH / 2 - 4, SCREEN_HEIGHT / 2 - 4, (*cameraLUT)[GLYPH_CAM_ARROW_DOWN]);
+			render_hud_small_tex_lut(SCREEN_WIDTH / 2 - 8, SCREEN_HEIGHT / 2 - 4, (*cameraLUT)[GLYPH_CAM_ARROW_UP]);
+			render_hud_small_tex_lut(SCREEN_WIDTH / 2 - 8, SCREEN_HEIGHT / 2 - 12, (*cameraLUT)[GLYPH_CAM_ARROW_DOWN]);
             render_hud_small_tex_lut(x + 4, y - 8, (*cameraLUT)[GLYPH_CAM_ARROW_UP]);
             break;
     }
