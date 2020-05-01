@@ -266,9 +266,6 @@ void render_hud_power_meter(void) {
  * Renders the amount of lives Mario has.
  */
 void render_hud_mario_lives(void) {
-	f32 distance;
-	s16 pitch, yaw;
-
     print_text(22, HUD_TOP_Y, ","); // 'Mario Head' glyph
     print_text(38, HUD_TOP_Y, "*"); // 'X' glyph
     print_text_fmt_int(54, HUD_TOP_Y, "%d", gHudDisplay.lives);
@@ -412,8 +409,8 @@ void render_hud_camera_status(void) {
             render_hud_small_tex_lut(x + 4, y + 16, (*cameraLUT)[GLYPH_CAM_ARROW_DOWN]);
             break;
         case CAM_STATUS_C_UP:
-			render_hud_small_tex_lut(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 2, (*cameraLUT)[GLYPH_CAM_ARROW_UP]);
-			render_hud_small_tex_lut(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 10, (*cameraLUT)[GLYPH_CAM_ARROW_DOWN]);
+			render_hud_small_tex_lut(SCREEN_WIDTH / 2 - 4, SCREEN_HEIGHT / 2 - 2, (*cameraLUT)[GLYPH_CAM_ARROW_UP]);
+			render_hud_small_tex_lut(SCREEN_WIDTH / 2 - 4, SCREEN_HEIGHT / 2 - 10, (*cameraLUT)[GLYPH_CAM_ARROW_DOWN]);
             render_hud_small_tex_lut(x + 4, y - 8, (*cameraLUT)[GLYPH_CAM_ARROW_UP]);
             break;
     }
