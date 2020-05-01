@@ -26,13 +26,7 @@ static const LevelScript script_func_local_1[] = {
 };
 
 static const LevelScript script_func_local_2[] = {
-    OBJECT_WITH_ACTS(/*model*/ MODEL_NONE,                  /*pos*/  1535, 3840, -5561, /*angle*/ 0, 0, 0,   /*behParam*/ 0x00000000, /*beh*/ bhvBobBowlingBallSpawner,  /*acts*/ ACT_1 | ACT_2),
-    OBJECT_WITH_ACTS(/*model*/ MODEL_NONE,                  /*pos*/  1535, 3840, -5561, /*angle*/ 0, 0, 0,   /*behParam*/ 0x00000000, /*beh*/ bhvTtmBowlingBallSpawner,  /*acts*/ ACT_3 | ACT_4 | ACT_5 | ACT_6),
-    OBJECT_WITH_ACTS(/*model*/ MODEL_NONE,                  /*pos*/   524, 2825, -5400, /*angle*/ 0, 0, 0,   /*behParam*/ 0x00020000, /*beh*/ bhvBobBowlingBallSpawner,  /*acts*/ ACT_1 | ACT_2),
-    OBJECT_WITH_ACTS(/*model*/ MODEL_NONE,                  /*pos*/   524, 2825, -5400, /*angle*/ 0, 0, 0,   /*behParam*/ 0x00020000, /*beh*/ bhvTtmBowlingBallSpawner,  /*acts*/ ACT_3 | ACT_4 | ACT_5 | ACT_6),
-    OBJECT          (/*model*/ MODEL_BOWLING_BALL,          /*pos*/  -993,  886, -3565, /*angle*/ 0, 0, 0,   /*behParam*/ 0x00000000, /*beh*/ bhvPitBowlingBall),
-    OBJECT          (/*model*/ MODEL_BOWLING_BALL,          /*pos*/  -785,  886, -4301, /*angle*/ 0, 0, 0,   /*behParam*/ 0x00000000, /*beh*/ bhvPitBowlingBall),
-    OBJECT_WITH_ACTS(/*model*/ MODEL_BOWLING_BALL,          /*pos*/   -93,  886, -3414, /*angle*/ 0, 0, 0,   /*behParam*/ 0x00000000, /*beh*/ bhvPitBowlingBall,         /*acts*/ ACT_2 | ACT_3 | ACT_4 | ACT_5 | ACT_6),
+	OBJECT(MODEL_GOOMBA, 1535, 3840, -5561, 0, 0, 0, 0x00000000, bhvGoomba),
     OBJECT_WITH_ACTS(/*model*/ MODEL_BOBOMB_BUDDY,          /*pos*/ -5723,  140,  6017, /*angle*/ 0, 0, 0,   /*behParam*/ DIALOG_002 << 16, /*beh*/ bhvBobombBuddy,            /*acts*/ ACT_1),
     OBJECT_WITH_ACTS(/*model*/ MODEL_BOBOMB_BUDDY,          /*pos*/ -6250,    0,  6680, /*angle*/ 0, 0, 0,   /*behParam*/ DIALOG_001 << 16, /*beh*/ bhvBobombBuddy,            /*acts*/ ACT_1),
     OBJECT_WITH_ACTS(/*model*/ MODEL_BOBOMB_BUDDY,          /*pos*/ -5723,  140,  6017, /*angle*/ 0, 0, 0,   /*behParam*/ 0x00000000,       /*beh*/ bhvBobombBuddyOpensCannon, /*acts*/ ACT_2 | ACT_3 | ACT_4 | ACT_5 | ACT_6),
@@ -78,7 +72,7 @@ const LevelScript level_bob_entry[] = {
         JUMP_LINK(script_func_local_1),
         JUMP_LINK(script_func_local_2),
         JUMP_LINK(script_func_local_3),
-        OBJECT(/*model*/ MODEL_NONE, /*pos*/  5540,  3300,  1200, /*angle*/ 0, 100, 0,  /*behParam*/ 0x000A0000, /*beh*/ bhvWarps74),
+        OBJECT(/*model*/ MODEL_NONE, /*pos*/  3611,  3072,   -53, /*angle*/ 0, 100, 0,  /*behParam*/ 0x000A0000, /*beh*/ bhvWarps74),
         OBJECT(/*model*/ MODEL_NONE, /*pos*/   583,  2683, -5387, /*angle*/ 0, -154, 0, /*behParam*/ 0x000B0000, /*beh*/ bhvFadingWarp),
         OBJECT(/*model*/ MODEL_NONE, /*pos*/  1680,  3835, -5523, /*angle*/ 0, -153, 0, /*behParam*/ 0x000C0000, /*beh*/ bhvFadingWarp),
         OBJECT(/*model*/ MODEL_NONE, /*pos*/ -6612,  1024, -3351, /*angle*/ 0, 107, 0,  /*behParam*/ 0x000D0000, /*beh*/ bhvFadingWarp),
@@ -97,7 +91,7 @@ const LevelScript level_bob_entry[] = {
     END_AREA(),
 
     FREE_LEVEL_POOL(),
-    MARIO_POS(/*area*/ 1, /*yaw*/ 100, /*pos*/ 5540, 3300, 1200),
+    MARIO_POS(/*area*/ 1, /*yaw*/ 100, /*pos*/ 3611, 3072, -53),
     CALL(/*arg*/ 0, /*func*/ lvl_init_or_update),
     CALL_LOOP(/*arg*/ 1, /*func*/ lvl_init_or_update),
     CLEAR_LEVEL(),

@@ -5,6 +5,7 @@
 #include "level_update.h"
 #include "camera.h"
 #include "print.h"
+#include "mario.h"
 #include "ingame_menu.h"
 #include "hud.h"
 #include "segment2.h"
@@ -267,6 +268,9 @@ void render_hud_mario_lives(void) {
     print_text(22, HUD_TOP_Y, ","); // 'Mario Head' glyph
     print_text(38, HUD_TOP_Y, "*"); // 'X' glyph
     print_text_fmt_int(54, HUD_TOP_Y, "%d", gHudDisplay.lives);
+	print_text_fmt_int(22, 180, "%d", gMarioState->pos[0]);
+	print_text_fmt_int(22, 165, "%d", gMarioState->pos[1]);
+	print_text_fmt_int(22, 150, "%d", gMarioState->pos[2]);
 }
 
 /**
