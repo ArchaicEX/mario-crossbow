@@ -84,8 +84,9 @@ void breakable_box_small_get_thrown(void) {
     o->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
     o->oHeldState = 0;
     o->oFlags &= ~0x08;
-    o->oForwardVel = coss(-o->oFaceAnglePitch) * 200;
-    o->oVelY = sins(-o->oFaceAnglePitch) * 200;
+    o->oForwardVel = coss(-o->oFaceAnglePitch) * 200.f;
+    o->oVelY = sins(-o->oFaceAnglePitch) * 200.f;
+	print_text_fmt_int
     o->oBreakableBoxSmallReleased = 1;
     o->oBreakableBoxSmallFramesSinceReleased = 0;
     o->activeFlags &= ~0x200;
