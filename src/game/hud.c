@@ -12,6 +12,7 @@
 #include "area.h"
 #include "save_file.h"
 #include "print.h"
+#include "math_util.h"
 
 /* @file hud.c
  * This file implements HUD rendering and power meter animations.
