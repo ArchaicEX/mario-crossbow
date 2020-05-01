@@ -265,13 +265,18 @@ void render_hud_power_meter(void) {
  * Renders the amount of lives Mario has.
  */
 void render_hud_mario_lives(void) {
+	f32 distance;
+	s16 pitch, yaw;
+
     print_text(22, HUD_TOP_Y, ","); // 'Mario Head' glyph
     print_text(38, HUD_TOP_Y, "*"); // 'X' glyph
     print_text_fmt_int(54, HUD_TOP_Y, "%d", gHudDisplay.lives);
-	print_text_fmt_int(22, 180, "%d", gMarioState->pos[0]);
-	print_text_fmt_int(22, 165, "%d", gMarioState->pos[1]);
-	print_text_fmt_int(22, 150, "%d", gMarioState->pos[2]);
-	print_text_fmt_int(22, 135, "%d", gMarioState->statusForCamera->headRotation[0]);
+	print_text_fmt_int(22, 180, "%d", gCamera->pos[0]);
+	print_text_fmt_int(22, 165, "%d", gCamera->pos[1]);
+	print_text_fmt_int(22, 150, "%d", gCamera->pos[2]);
+	vec3f_get_dist_and_angle(gCamera->pos, gCamera->focus, distance, pitch, yaw);
+	print_text_fmt_int(22, 135, "%d", pitch);
+	print_text_fmt_int(22, 120, "%d", yaw);
 }
 
 /**
