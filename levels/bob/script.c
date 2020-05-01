@@ -97,7 +97,7 @@ const LevelScript level_bob_entry[] = {
     END_AREA(),
 
     FREE_LEVEL_POOL(),
-    MARIO_POS(/*area*/ 1, /*yaw*/ 100, /*pos*/ 5540, 3300, 1200),
+    MARIO_POS(/*area*/ 1, /*yaw*/ 100, /*pos*/ 3611, 3072, -53),
     CALL(/*arg*/ 0, /*func*/ lvl_init_or_update),
     CALL_LOOP(/*arg*/ 1, /*func*/ lvl_init_or_update),
     CLEAR_LEVEL(),
