@@ -269,8 +269,8 @@ void render_hud_mario_lives(void) {
     print_text(38, HUD_TOP_Y, "*"); // 'X' glyph
     print_text_fmt_int(54, HUD_TOP_Y, "%d", gHudDisplay.lives);
 	print_text_fmt_int(22, 180, "%d", gMarioState->pos[0]);
-	print_text_fmt_int(22, 170, "%d", gMarioState->pos[1]);
-	print_text_fmt_int(22, 160, "%d", gMarioState->pos[2]);
+	print_text_fmt_int(22, 165, "%d", gMarioState->pos[1]);
+	print_text_fmt_int(22, 150, "%d", gMarioState->pos[2]);
 }
 
 /**
