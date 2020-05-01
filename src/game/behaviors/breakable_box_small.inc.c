@@ -1,5 +1,5 @@
 // breakable_box.c.inc
-
+#include "print.h"
 struct ObjectHitbox sBreakableBoxSmallHitbox = {
     /* interactType:      */ INTERACT_GRABBABLE,
     /* downOffset:        */ 20,
