@@ -1082,7 +1082,7 @@ s32 act_first_person(struct MarioState *m) {
 		vec3f_get_dist_and_angle(gCamera->pos, gCamera->focus, &distance, &pitch, &yaw);
 		spawn_object_abs_with_rot(m->marioObj, 0, MODEL_BREAKABLE_BOX_SMALL, bhvBreakableBoxSmall,
 				gCamera->pos[0] + (s16)(sins(yaw) * 120),
-				gCamera->pos[1] + (s16)(sins(pitch) * 120),
+				gCamera->pos[1] + (s16)(sins(-pitch) * 120),
 				gCamera->pos[2] + (s16)(coss(yaw) * 120),
 				-pitch, yaw, 0);
 	}
