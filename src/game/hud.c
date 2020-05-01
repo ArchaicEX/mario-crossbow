@@ -275,7 +275,7 @@ void render_hud_mario_lives(void) {
 	print_text_fmt_int(22, 180, "%d", gCamera->pos[0]);
 	print_text_fmt_int(22, 165, "%d", gCamera->pos[1]);
 	print_text_fmt_int(22, 150, "%d", gCamera->pos[2]);
-	vec3f_get_dist_and_angle(gCamera->pos, gCamera->focus, distance, pitch, yaw);
+	vec3f_get_dist_and_angle(gCamera->pos, gCamera->focus, &distance, &pitch, &yaw);
 	print_text_fmt_int(22, 135, "%d", pitch);
 	print_text_fmt_int(22, 120, "%d", yaw);
 }
