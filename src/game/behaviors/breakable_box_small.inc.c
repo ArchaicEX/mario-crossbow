@@ -16,7 +16,7 @@ void bhv_breakable_box_small_init(void) {
     o->oGravity = 0;
     o->oFriction = 0.99f;
     o->oBuoyancy = 1.4f;
-    cur_obj_scale(0.0256f);
+    cur_obj_scale(0.256f);
     obj_set_hitbox(o, &sBreakableBoxSmallHitbox);
     o->oAnimState = 1;
     o->activeFlags |= 0x200;
@@ -84,8 +84,8 @@ void breakable_box_small_get_thrown(void) {
     o->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
     o->oHeldState = 0;
     o->oFlags &= ~0x08;
-    o->oForwardVel = coss(o->oFaceAnglePitch) * 200;
-    o->oVelY = sins(-o->oFaceAnglePitch) * 200;
+    o->oForwardVel = coss(o->oFaceAnglePitch) * 20;
+    o->oVelY = sins(-o->oFaceAnglePitch) * 20;
     o->oBreakableBoxSmallReleased = 1;
     o->oBreakableBoxSmallFramesSinceReleased = 0;
     o->activeFlags &= ~0x200;
