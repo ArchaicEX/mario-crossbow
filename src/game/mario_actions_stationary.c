@@ -1081,7 +1081,7 @@ s32 act_first_person(struct MarioState *m) {
 		boltAngle = m->statusForCamera->faceAngle[1] + m->statusForCamera->headRotation[1];
 		cameraPitch = DEGREES(180) - m->statusForCamera->headRotation[0];
 		spawn_object_abs_with_rot(m->marioObj, 0, MODEL_BREAKABLE_BOX_SMALL, bhvBreakableBoxSmall,
-				m->pos[0] + (s16)(sins(boltAngle) * 60), m->pos[1] + 121 - (s16)(sins(cameraPitch) * 5), m->pos[2] + (s16)(coss(boltAngle) * 60),
+				m->pos[0] + (s16)(sins(boltAngle) * 60), m->pos[1] + 121 + (s16)(coss(cameraPitch) * 5), m->pos[2] + (s16)(coss(boltAngle) * 60),
 				m->statusForCamera->faceAngle[0] + m->statusForCamera->headRotation[0], boltAngle, 0);
 	}
 
