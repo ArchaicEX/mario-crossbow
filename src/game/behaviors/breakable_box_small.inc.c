@@ -30,15 +30,8 @@ void small_breakable_box_spawn_dust(void) {
 }
 
 void small_breakable_box_act_move(void) {
-    s16 collisions = object_step();
-
+	obj_move_xyz_using_fvel_and_yaw(o);
     obj_attack_collided_from_other_object(o);
-
-    if (collisions & 1 || collisions & 2) {
-        o->activeFlags = 0;
-    }
-
-    obj_check_floor_death(collisions, sObjFloor);
 }
 
 void breakable_box_small_released_loop(void) {
