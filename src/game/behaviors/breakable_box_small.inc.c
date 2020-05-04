@@ -6,10 +6,10 @@ struct ObjectHitbox sBreakableBoxSmallHitbox = {
     /* damageOrCoinValue: */ 0,
     /* health:            */ 1,
     /* numLootCoins:      */ 0,
-    /* radius:            */ 8,
-    /* height:            */ 16,
-    /* hurtboxRadius:     */ 8,
-    /* hurtboxHeight:     */ 16,
+    /* radius:            */ 24,
+    /* height:            */ 48,
+    /* hurtboxRadius:     */ 24,
+    /* hurtboxHeight:     */ 48,
 };
 
 void bhv_breakable_box_small_init(void) {
