@@ -272,6 +272,7 @@ void render_hud_mario_lives(void) {
 	print_text_fmt_int(22, 180, "%d", gMarioState->pos[0]);
 	print_text_fmt_int(22, 165, "%d", gMarioState->pos[1]);
 	print_text_fmt_int(22, 150, "%d", gMarioState->pos[2]);
+	print_text_fmt_int(22, 135, "%d", gMarioState->faceAngle[1]);
 }
 
 /**
