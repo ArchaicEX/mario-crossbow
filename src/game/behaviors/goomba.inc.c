@@ -248,7 +248,7 @@ void bhv_goomba_update(void) {
             mark_goomba_as_dead();
         }
 
-        cur_obj_move_standard(-78);
+        cur_obj_move_standard(0);
     } else {
         o->oAnimState = TRUE;
     }
