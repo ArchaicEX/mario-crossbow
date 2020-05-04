@@ -2,10 +2,10 @@
 const Trajectory bob_seg7_metal_ball_path0[] = {
     TRAJECTORY_POS(0, /*pos*/  4662, 3268, -5961),
     TRAJECTORY_POS(1, /*pos*/  5119, 3170, -5594),
-    TRAJECTORY_POS(2, /*pos*/  4979, 3082, -2832),
-    TRAJECTORY_POS(3, /*pos*/  3337, 2959, -1838),
+    TRAJECTORY_POS(2, /*pos*/  4994, 3030, -3370),
+    TRAJECTORY_POS(3, /*pos*/  3084, 2894, -2335),
     TRAJECTORY_POS(4, /*pos*/  2350, 2917, -2004),
-    TRAJECTORY_POS(5, /*pos*/  3503,  3638, -6783),
+    TRAJECTORY_POS(5, /*pos*/  2700, 2613, -2368),
     TRAJECTORY_POS(6, /*pos*/  4863,  3354, -5954),
     TRAJECTORY_POS(7, /*pos*/  5081,  3221, -5754),
     TRAJECTORY_POS(8, /*pos*/  5118,  3209, -5481),
