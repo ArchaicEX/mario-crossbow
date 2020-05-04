@@ -1223,7 +1223,7 @@ static s32 cur_obj_move_xz(f32 steepSlopeNormalY, s32 careAboutEdgesAndSteepSlop
     f32 intendedX = o->oPosX + o->oVelX;
     f32 intendedZ = o->oPosZ + o->oVelZ;
 
-    f32 intendedFloorHeight = find_floor(intendedX, o->oPosY, intendedZ, &intendedFloor);
+    f32 intendedFloorHeight = find_floor(intendedX, o->oPosY + 20, intendedZ, &intendedFloor);
     f32 deltaFloorHeight = intendedFloorHeight - o->oFloorHeight;
 
     UNUSED f32 unused;
@@ -1248,10 +1248,6 @@ static s32 cur_obj_move_xz(f32 steepSlopeNormalY, s32 careAboutEdgesAndSteepSlop
             o->oPosX = intendedX;
             o->oPosZ = intendedZ;
             return TRUE;
-        } else if (deltaFloorHeight < -50.0f && (o->oMoveFlags & OBJ_MOVE_ON_GROUND)) {
-            // Don't walk off an edge
-            o->oMoveFlags |= OBJ_MOVE_HIT_EDGE;
-            return FALSE;
         } else if (intendedFloor->normal.y > steepSlopeNormalY) {
             // Allow movement onto a slope, provided it's not too steep
             o->oPosX = intendedX;
