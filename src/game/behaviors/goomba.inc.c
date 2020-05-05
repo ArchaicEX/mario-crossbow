@@ -71,7 +71,7 @@ static u8 sGoombaAttackHandlers[][6] = {
 void bhv_goomba_triplet_spawner_update(void) {
 	if (o->oTimer % 30 == 0)
 		spawn_object_relative(o->oBehParams2ndByte, 0, 0, 0, o, MODEL_GOOMBA, bhvGoomba);
-	gMarioState.faceAngle[1] = o->oTimer;
+	gMarioState->faceAngle[1] = o->oTimer;
 }
 
 /**
