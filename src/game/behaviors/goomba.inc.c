@@ -34,9 +34,9 @@ struct GoombaProperties {
  * Properties for regular, huge, and tiny goombas.
  */
 static struct GoombaProperties sGoombaProperties[] = {
-    { 1.5f, SOUND_OBJ_ENEMY_DEATH_HIGH, 4000, 1 },
-    { 3.5f, SOUND_OBJ_ENEMY_DEATH_LOW, 4000, 2 },
-    { 0.5f, SOUND_OBJ_ENEMY_DEATH_HIGH, 1500, 0 },
+    { 3.0f, SOUND_OBJ_ENEMY_DEATH_HIGH, 4000, 1 },
+    { 7.0f, SOUND_OBJ_ENEMY_DEATH_LOW, 4000, 2 },
+    { 1.0f, SOUND_OBJ_ENEMY_DEATH_HIGH, 1500, 0 },
 };
 
 static void *sPaths[] = { bob_seg7_metal_ball_path0, bob_seg7_metal_ball_path1, bob_seg7_trajectory_koopa };
@@ -69,43 +69,8 @@ static u8 sGoombaAttackHandlers[][6] = {
  * Update function for goomba triplet spawner.
  */
 void bhv_goomba_triplet_spawner_update(void) {
-    UNUSED s32 unused1;
-    s16 goombaFlag;
-    UNUSED s16 unused2;
-    s32 angle;
-    s32 dAngle;
-    s16 dx;
-    s16 dz;
-
-    // If mario is close enough and the goombas aren't currently loaded, then
-    // spawn them
-    if (o->oAction == GOOMBA_TRIPLET_SPAWNER_ACT_UNLOADED) {
-        if (o->oDistanceToMario < 3000.0f) {
-            // The spawner is capable of spawning more than 3 goombas, but this
-            // is not used in the game
-            dAngle =
-                0x10000
-                / (((o->oBehParams2ndByte & GOOMBA_TRIPLET_SPAWNER_BP_EXTRA_GOOMBAS_MASK) >> 2) + 3);
-
-            for (angle = 0, goombaFlag = 1 << 8; angle < 0xFFFF; angle += dAngle, goombaFlag <<= 1) {
-                // Only spawn goombas which haven't been killed yet
-                if (!(o->oBehParams & goombaFlag)) {
-                    dx = 500.0f * coss(angle);
-                    dz = 500.0f * sins(angle);
-
-                    spawn_object_relative((o->oBehParams2ndByte & GOOMBA_TRIPLET_SPAWNER_BP_SIZE_MASK)
-                                              | (goombaFlag >> 6),
-                                          dx, 0, dz, o, MODEL_GOOMBA, bhvGoomba);
-                }
-            }
-
-            o->oAction += 1;
-        }
-    } else if (o->oDistanceToMario > 4000.0f) {
-        // If mario is too far away, enter the unloaded action. The goombas
-        // will detect this and unload themselves
-        o->oAction = GOOMBA_TRIPLET_SPAWNER_ACT_UNLOADED;
-    }
+	if (o->oTimer % 30 == 0)
+		spawn_object_relative(o->oBehParams2ndByte, 0, 0, 0, o, MODEL_GOOMBA, bhvGoomba);
 }
 
 /**
