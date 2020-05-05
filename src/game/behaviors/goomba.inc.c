@@ -69,9 +69,9 @@ static u8 sGoombaAttackHandlers[][6] = {
  * Update function for goomba triplet spawner.
  */
 void bhv_goomba_triplet_spawner_update(void) {
+	o->oFlags |= OBJ_FLAG_ACTIVE_FROM_AFAR;
 	if (o->oTimer % 30 == 0)
 		spawn_object_relative(o->oBehParams2ndByte, 0, 0, 0, o, MODEL_GOOMBA, bhvGoomba);
-	gMarioState->faceAngle[1] = o->oTimer;
 }
 
 /**
